@@ -12,7 +12,7 @@ def is_alert_present(wd):
 
 class add_new_group_test(unittest.TestCase):
     def setUp(self):
-        self.wd = WebDriver()
+        self.wd = WebDriver(capabilities={"marionette": False})
         self.wd.implicitly_wait(60)
     
     def test_add_new_group_test(self):
