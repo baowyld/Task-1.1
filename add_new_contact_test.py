@@ -18,5 +18,3 @@ def test_add_new_contact_test(app):
     app.logout()
 
 
-def tearDown(self):
-    self.app.destroy()
