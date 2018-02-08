@@ -1,4 +1,4 @@
-class GroupHelper:
+class CreationHelper:
 
     def __init__(self, app):
         self.app = app
@@ -7,7 +7,7 @@ class GroupHelper:
         wd = self.app.wd
         wd.find_element_by_link_text("group page").click()
 
-    def create(self, group):
+    def create_group(self, group):
         self.open_groups_page()
         # init_group creation
         wd = self.app.wd
@@ -26,19 +26,10 @@ class GroupHelper:
         wd.find_element_by_name("submit").click()
         self.return_to_groups_page()
 
-    def open_groups_page(self):
-        wd = self.app.wd
-        wd.find_element_by_link_text("groups").click()
-
-
-class ContactHelper:
-
-    def __init__(self, app):
-        self.app = app
-
-    def create(self, contact):
-        wd = self.app.wd
+    def create_contact(self, contact):
         self.open_new_contact_menu()
+        # init_contact creation
+        wd = self.app.wd
         # fill new contact form
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
@@ -89,4 +80,12 @@ class ContactHelper:
     def open_new_contact_menu(self):
         wd = self.app.wd
         wd.find_element_by_link_text("add new").click()
+
+    def open_groups_page(self):
+        wd = self.app.wd
+        wd.find_element_by_link_text("groups").click()
+
+
+
+
 
