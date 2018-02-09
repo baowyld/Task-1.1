@@ -26,6 +26,36 @@ class CreationHelper:
         wd.find_element_by_name("submit").click()
         self.return_to_groups_page()
 
+    def delete_first_group(self):
+        wd = self.app.wd
+        self.open_groups_page()
+        #  select first group
+        wd.find_element_by_name("selected[]").click()
+        # submit deletion
+        wd.find_element_by_name("delete").click()
+        self.return_to_groups_page()
+
+    def update_first_group(self, group):
+        wd = self.app.wd
+        self.open_groups_page()
+        # update first group
+        if not wd.find_element_by_name("selected[]").is_selected():
+            wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_name("edit").click()
+        wd.find_element_by_name("group_name").click()
+        wd.find_element_by_name("group_name").clear()
+        wd.find_element_by_name("group_name").send_keys(group.name)
+        wd.find_element_by_name("group_header").click()
+        wd.find_element_by_name("group_header").clear()
+        wd.find_element_by_name("group_header").send_keys(group.header)
+        wd.find_element_by_name("group_footer").click()
+        wd.find_element_by_name("group_footer").clear()
+        wd.find_element_by_name("group_footer").send_keys(group.footer)
+        wd.find_element_by_xpath("//div[@id='content']/form").click()
+        # submit update
+        wd.find_element_by_name("update").click()
+        self.return_to_groups_page()
+
     def create_contact(self, contact):
         self.open_new_contact_menu()
         # init_contact creation
@@ -76,6 +106,16 @@ class CreationHelper:
         wd.find_element_by_name("phone2").send_keys(contact.secondaryhomenumber)
         # submit contact creation
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
+
+#    def delete_first_contact(self):
+#        wd = self.app.wd
+#        wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
+#        if not wd.find_element_by_id("19").is_selected():
+#            wd.find_element_by_id("19").click()
+#        wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
+
+#    def edit_first_contact(self):
+#        wd = self.app.wd
 
     def open_new_contact_menu(self):
         wd = self.app.wd
