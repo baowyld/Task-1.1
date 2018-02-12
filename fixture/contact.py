@@ -4,6 +4,7 @@ class ContactHelper:
         self.app = app
 
     def create(self, contact):
+        self.app.open_home_page()
         self.open_new_contact_menu()
         # init_contact creation
         wd = self.app.wd
@@ -53,15 +54,16 @@ class ContactHelper:
 
     def delete_first(self):
         wd = self.app.wd
-        wd.find_element_by_name("selected[]").click()
+        self.app.open_home_page()
+        self.select_first()
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         wd.switch_to_alert().accept()
 
     def update_first(self, contact):
         wd = self.app.wd
-        # select first contact
-        wd.find_element_by_name("selected[]").click()
-        wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
+        self.app.open_home_page()
+        self.select_first()
+        self.open_updater()
         # update contact details
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
@@ -109,3 +111,11 @@ class ContactHelper:
     def open_new_contact_menu(self):
         wd = self.app.wd
         wd.find_element_by_link_text("add new").click()
+
+    def select_first(self):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+
+    def open_updater(self):
+        wd = self.app.wd
+        wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
