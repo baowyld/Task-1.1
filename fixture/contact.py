@@ -5,7 +5,7 @@ class ContactHelper:
 
     def create(self, contact):
         self.app.open_home_page()
-        self.open_new_contact_menu()
+        self.open_new_contact_page()
         # init_contact creation
         wd = self.app.wd
         self.fill_contact_form(contact)
@@ -43,9 +43,10 @@ class ContactHelper:
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         wd.switch_to_alert().accept()
 
-    def open_new_contact_menu(self):
+    def open_new_contact_page(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("add new").click()
+        if not wd.current_url.endswith("/edit.php"):
+            wd.find_element_by_link_text("add new").click()
 
     def select_first_contact(self):
         wd = self.app.wd
