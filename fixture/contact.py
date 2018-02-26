@@ -1,3 +1,6 @@
+from model.contact import Contact
+
+
 class ContactHelper:
 
     def __init__(self, app):
@@ -54,16 +57,16 @@ class ContactHelper:
 
     def open_contact_updater(self):
         wd = self.app.wd
-        wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
+        # wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
+        elements = wd.find_elements_by_xpath(".//img[@title='Edit']")
+        elements[0].click()
 
     def modify_first_contact(self, new_contact_data):
         wd = self.app.wd
         self.app.open_home_page()
-        self.select_first_contact()
+        # self.select_first_contact()
         self.open_contact_updater()
-        # fill the form
         self.fill_contact_form(new_contact_data)
-        # submit update
         wd.find_element_by_name("update").click()
         self.app.open_home_page()
 
@@ -71,3 +74,15 @@ class ContactHelper:
         wd = self.app.wd
         self.app.open_home_page()
         return len(wd.find_elements_by_name("selected[]"))
+
+    def get_contact_list(self):
+        wd = self.app.wd
+        self.app.open_home_page()
+        contacts = []
+        for element in wd.find_elements_by_name("entry"):
+                cells = element.find_elements_by_tag_name("td")
+                id = element.find_element_by_name("selected[]").get_attribute("value")
+                lastname = cells[1].text
+                firstname = cells[2].text
+                contacts.append(Contact(firstname=firstname, lastname=lastname, id=id))
+        return contacts
