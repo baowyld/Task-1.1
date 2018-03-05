@@ -64,7 +64,6 @@ class ContactHelper:
 
     def open_contact_updater_by_index(self, index):
         wd = self.app.wd
-        # wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
         wd.find_elements_by_xpath(".//img[@title='Edit']")[index].click()
 
     def modify_contact_by_index(self, index, new_contact_data):
@@ -77,8 +76,8 @@ class ContactHelper:
         self.app.open_home_page()
         self.contact_cache = None
 
-    def modify_first_contact(self):
-        self.modify_contact_by_index(0)
+    def modify_first_contact(self, new_contact_data):
+        self.modify_contact_by_index(0, new_contact_data)
 
     def count_contacts(self):
         wd = self.app.wd
