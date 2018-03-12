@@ -5,9 +5,10 @@ from random import randrange
 def test_some_contact(app):
     if app.contact.count_contacts() == 0:
         app.contact.create(Contact(firstname="Fname", middlename="Mname", lastname="Lname", nickname="Nick",
-                               title="TestTitle", company="TestCompany", address="TestAddress", homephone="1111111",
-                               mobilephone="2222222", workphone="3333333", fax="fax", email="test@test.test", birth="1980",
-                               secondaryaddress="TestAddress2", secondaryphone="4444444"))
+                      title="TestTitle", company="TestCompany", address="TestAddress", homephone="1111111",
+                      mobilephone="2222222", workphone="3333333", fax="fax",
+                      email="test@test.test", email2="test2@test.test", email3="test3@test.test", homepage="homepage",
+                      birth="1980", secondaryaddress="TestAddress2", secondaryphone="4444444"))
     old_contacts = app.contact.get_contact_list()
     index = randrange(len(old_contacts))
     app.contact.delete_contact_by_index(index)

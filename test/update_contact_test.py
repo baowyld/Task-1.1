@@ -5,9 +5,10 @@ from random import randrange
 def test_modify_some_contact_firstname(app):
     if app.contact.count_contacts() == 0:
         app.contact.create(Contact(firstname="Fname", middlename="Mname", lastname="Lname", nickname="Nick",
-                               title="TestTitle", company="TestCompany", address="TestAddress", homephone="1111111",
-                               mobilephone="2222222", workphone="3333333", fax="fax", email="test@test.test", birth="1980",
-                               secondaryaddress="TestAddress2", secondaryphone="4444444"))
+                      title="TestTitle", company="TestCompany", address="TestAddress", homephone="1111111",
+                      mobilephone="2222222", workphone="3333333", fax="fax",
+                      email="test@test.test", email2="test2@test.test", email3="test3@test.test", homepage="homepage",
+                      birth="1980", secondaryaddress="TestAddress2", secondaryphone="4444444"))
     old_contacts = app.contact.get_contact_list()
     index = randrange(len(old_contacts))
     contact = Contact(firstname="New_Firstname")
@@ -19,8 +20,4 @@ def test_modify_some_contact_firstname(app):
     assert sorted(old_contacts, key=Contact.id_or_max) == sorted(new_contacts, key=Contact.id_or_max)
 
 
-# def test_modify_contact_lastname(app):
-#     if app.contact.count_contacts() == 0:
-#         app.contact.create(Contact(firstname="test_firstname", lastname="test_lastname"))
-#     app.contact.modify_first_contact(Contact(lastname="New_Lastname"))
 
