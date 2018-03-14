@@ -5,19 +5,19 @@ import string
 
 
 def random_string(prefix, maxlen):
-    symbols = string.ascii_letters + string.digits + " "*10
+    symbols = string.ascii_letters + string.digits
     # symbols = string.ascii_letters + string.digits + string. punctuation + " "*10
     return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
 
 testdata = [
-    Contact(firstname="", middlename="",
-            lastname="", nickname="",
-            title="", company="", address="",
-            homephone="", mobilephone="", workphone="",
-            fax="", email="", email2="", email3="",
-            homepage="",
-            secondaryaddress="", secondaryphone="")] + [
+    # Contact(firstname="", middlename="",
+    #         lastname="", nickname="",
+    #         title="", company="", address="",
+    #         homephone="", mobilephone="", workphone="",
+    #         fax="", email="", email2="", email3="",
+    #         homepage="",
+    #         secondaryaddress="", secondaryphone="")] + [
     Contact(firstname=random_string("firstname", 10), middlename=random_string("middlename", 10),
             lastname=random_string("lastname", 10), nickname=random_string("nickname", 10),
             title=random_string("title", 10), company=random_string("company", 10), address=random_string("address", 10),
