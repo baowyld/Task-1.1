@@ -2,7 +2,7 @@ from model.contact import Contact
 from random import randrange
 
 
-def test_some_contact(app):
+def test_delete_some_contact(app):
     if app.contact.count_contacts() == 0:
         app.contact.create(Contact(firstname="Fname", middlename="Mname", lastname="Lname", nickname="Nick",
                       title="TestTitle", company="TestCompany", address="TestAddress", homephone="1111111",
