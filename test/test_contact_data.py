@@ -1,8 +1,27 @@
 import re
 from random import randrange
+from model.contact import Contact
 
 
-def test_contact_data(app):
+def test_all_contacts_data(app, db):
+    if len(db.get_contact_list()) == 0:
+        app.contact.create(Contact(firstname="Fname", middlename="Mname", lastname="Lname", nickname="Nick",
+                      title="TestTitle", company="TestCompany", address="TestAddress", homephone="1111111",
+                      mobilephone="2222222", workphone="3333333", fax="fax",
+                      email="test@test.test", email2="test2@test.test", email3="test3@test.test", homepage="homepage",
+                      birth="1980", secondaryaddress="TestAddress2", secondaryphone="4444444"))
+    contacts_hp = sorted(app.contact.get_contact_list(), key=Contact.id_or_max)
+    contacts_db = sorted(db.get_contact_list(), key=Contact.id_or_max)
+    assert len(contacts_hp) == len(contacts_db)
+    for i in range(len(contacts_db)):
+        assert contacts_hp[i].lastname == contacts_db[i].lastname
+        assert contacts_hp[i].firstname == contacts_db[i].firstname
+        assert contacts_hp[i].address == contacts_db[i].address
+        print("On home page: ", "\n", contacts_hp[i])
+        print("In database: ", "\n", contacts_db[i], "\n", "----------------------------------------------------")
+
+
+def test_random_contact_data(app):
     contacts = app.contact.get_contact_list()
     index = randrange(len(contacts))
     contact_from_home_page = app.contact.get_contact_list()[index]
@@ -43,4 +62,4 @@ def merge_phones_like_on_home_page(contact):
 def merge_emails_like_on_home_page(contact):
     return "\n".join(filter(lambda x: x != "",
                             map(lambda x: clear(x),
-                                filter(lambda x: x is not None,[contact.email, contact.email2, contact.email3]))))
+                                filter(lambda x: x is not None, [contact.email, contact.email2, contact.email3]))))

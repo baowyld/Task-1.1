@@ -3,7 +3,7 @@ import random
 
 
 def test_modify_some_group_name(app, db, check_ui):
-    if app.group.count_groups() == 0:
+    if len(db.get_contact_list()) == 0:
         app.group.create(Group(name="test_name", header="test_header", footer="test_footer"))
     old_groups = db.get_group_list()
     group = random.choice(old_groups)
