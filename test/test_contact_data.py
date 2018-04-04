@@ -17,6 +17,8 @@ def test_all_contacts_data(app, db):
         assert contacts_hp[i].lastname == contacts_db[i].lastname
         assert contacts_hp[i].firstname == contacts_db[i].firstname
         assert contacts_hp[i].address == contacts_db[i].address
+        assert contacts_hp[i].all_phones_from_home_page == merge_phones_like_on_home_page(contacts_db[i])
+        assert contacts_hp[i].all_emails_from_home_page == merge_emails_like_on_home_page(contacts_db[i])
         print("On home page: ", "\n", contacts_hp[i])
         print("In database: ", "\n", contacts_db[i], "\n", "----------------------------------------------------")
 
