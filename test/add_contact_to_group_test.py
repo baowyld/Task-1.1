@@ -16,17 +16,16 @@ def test_add_contact_to_group(app):
     if len(orm.get_group_list()) == 0:
         app.group.create(Group(name="test_name", header="test_header", footer="test_footer"))
     # Selection of random group and contact
-    app.open_home_page()
     contact = random.choice(orm.get_contact_list())
     group = random.choice(orm.get_group_list())
-    old_contacts_in_group = orm.get_contacts_in_group(Group(id=group.id))
+    old_contacts_in_group = orm.get_contacts_in_group(group)
     # Adding of contact to group
     app.contact.add_contact_to_group(contact.id, group.name)
-    new_contacts_in_group = orm.get_contacts_in_group(Group(id=group.id))
+    new_contacts_in_group = orm.get_contacts_in_group(group)
     if len(old_contacts_in_group) == len(new_contacts_in_group):
-        print("\n", "Same group was chosen for the selected contact, please retry")
+        print("\n", "Same group was chosen for the selected contact, please retry or create more groups")
     else:
         assert len(old_contacts_in_group) + 1 == len(new_contacts_in_group)
         for contact_in_group in new_contacts_in_group:
             assert (contact_in_group.id == contact.id)
-            print("\n", "Contact ", contact.firstname, "was successfully added to group ", group.name)
+            print("\n", "Contact", contact.firstname, "was successfully added to group", group.name)
